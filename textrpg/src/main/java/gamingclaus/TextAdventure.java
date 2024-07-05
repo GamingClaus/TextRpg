@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class TextAdventure{
     public static void main(String[] args) throws InterruptedException {
 
-        String[] listcommands = {"go","take","drop","use","exit"};
+        String[] listcommands = {"adventure","take","drop","use","exit"};
         List<String> validcommands = Arrays.asList(listcommands);
         String playername = "";
         String playercommand = " ";
@@ -20,7 +20,7 @@ public class TextAdventure{
         Scanner scanner = new Scanner(System.in);
 
 
-        System.out.print("Welcome to The World Of Text-Based-Rpg Game!!!");
+        System.out.println("Welcome to The World Of Text-Based-Rpg Game!!!");
         Thread.sleep(1000);
         String player = playermodel.PlayerType();
         //checks the player if they have chosen a right player type
@@ -30,7 +30,7 @@ public class TextAdventure{
             
         }
          Thread.sleep(200);
-         System.out.print("Enter your name:");
+         System.out.println("Enter your name:");
          playername = scanner.nextLine();
          System.out.println("Hello " + ANSI_UNDERLINE + playername + ANSI_RESET + " Welcome to the World of Text-Rpg."  );
         
@@ -44,8 +44,9 @@ public class TextAdventure{
             //checks if the commands are valid ones
 
             if(validcommands.contains(playercommand))
+            playercommand.toLowerCase(); //switches the userinput to all lowercase
             switch (playercommand) {
-                case "go":
+                case "adventure":
                     adventureModel.Go();
                     Thread.sleep(500);
                     break;
