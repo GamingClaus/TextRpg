@@ -8,7 +8,7 @@ public class TextAdventure{
     public static void main(String[] args) throws InterruptedException {
 
         String[] listcommands = {"adventure","take","drop","use","exit"};
-        List<String> validcommands = Arrays.asList(listcommands);
+        List<String> validcommands = Arrays.asList(listcommands); // converts the array into arraylist
         String playername = "";
         String playercommand = " ";
 
@@ -17,8 +17,8 @@ public class TextAdventure{
 
         AdventureModel adventureModel = new AdventureModel();
         PlayerModel playermodel = new PlayerModel();
+        ItemManager itemManager = new ItemManager();
         Scanner scanner = new Scanner(System.in);
-
 
         System.out.println("Welcome to The World Of Text-Based-Rpg Game!!!");
         Thread.sleep(1000);

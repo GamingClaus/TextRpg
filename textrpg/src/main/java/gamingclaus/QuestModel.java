@@ -7,6 +7,7 @@ public class QuestModel {
     private Scanner scanner;
     private String choice;
     private Random random;
+    ItemManager itemManager = new ItemManager();
     QuestModel(){
         scanner = new Scanner(System.in);
     }
@@ -30,20 +31,26 @@ public class QuestModel {
         if (choice.equalsIgnoreCase("do")) {
             random = new Random();
             int battle = random.nextInt(100);//generates random number between 1 and 2;
+            int randomitem = random.nextInt(itemManager.getSize()+1);
             if(battle<60){
                 //doing the quest has a 60% chance of completing the quest successfully
-
                 System.out.println("You Successfully Completed the quest.");
                 Thread.sleep(1000);
                 System.out.println("Old Man: Thank you!! My Dear Child here is your reward!");
                 Thread.sleep(1000);
-                System.out.println("Then you went your own way.!");
+                System.out.println("The Old man gave you " + itemManager.getItemById(randomitem));
+                Thread.sleep(1000);
 
+                System.out.println("Then you went your own way.!");
+                Thread.sleep(1000);
+                System.out.print("\033[H\033[2J");
             }
             else{
                 System.out.println("You messed up :(");
                 Thread.sleep(500);
-                System.out.println("You back to adventure sadly!");
+                System.out.println("You went back to adventure sadly!");
+                Thread.sleep(1000);
+                System.out.print("\033[H\033[2J");
                 
             }
         }
@@ -52,7 +59,7 @@ public class QuestModel {
         if (choice.equalsIgnoreCase("run")) {
             System.out.println("You hated your own weakness.So you ran away from the quest!");
             Thread.sleep(1000);
-
+            System.out.print("\033[H\033[2J");
             }
             
     }
