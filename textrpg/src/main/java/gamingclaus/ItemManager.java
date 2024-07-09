@@ -11,15 +11,19 @@ public class ItemManager {
 
 
     private void itemMap(){
-        items.put(1,new ItemSystem(1, "a Sword", "Weapon"));
-        items.put(2,new ItemSystem(2, "an Apple", "Food"));
-        items.put(3,new ItemSystem(3, "Water", "Food"));
-        items.put(4,new ItemSystem(4, "Seeds", "Food"));
-        items.put(5,new ItemSystem(5, "a Potion", "Heal"));
+        items.put(0,new ItemSystem(1, "Sword", "Weapon"));
+        items.put(1,new ItemSystem(2, "Apple", "Food"));
+        items.put(2,new ItemSystem(3, "Water", "Food"));
+        items.put(3,new ItemSystem(4, "Seeds", "Food"));
+        items.put(4,new ItemSystem(5, "Potion", "Heal"));
     }
 
 
-    public String getItemById(int id){
+    public ItemSystem getItemById(int id){
+            return items.get(id);
+        }
+
+    public String getItemNameById(int id){
         ItemSystem item = items.get(id);
         if(item!=null){
             return item.getItemName();
@@ -30,6 +34,7 @@ public class ItemManager {
         }
 
     }
+
 
     public int getSize(){
         return items.size();

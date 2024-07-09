@@ -1,33 +1,36 @@
 package gamingclaus;
 
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
 public class AdventureModel {
     TextAdventure textAdventure = new TextAdventure();
-    MonsterModel monsterModel = new MonsterModel();
-    QuestModel questmodel = new QuestModel();
+    Inventory inventory;
+    MonsterModel monsterModel;
+    QuestModel questmodel;
     ItemManager itemManager = new ItemManager();
     Scanner scanner;
     Random random;
     AdventureModel(){
-
-
+        inventory = new Inventory();
+        monsterModel = new MonsterModel(inventory);
+        questmodel = new QuestModel(inventory);
 
     }
     //List of basic Commands for tpg
     public void Go() throws InterruptedException{
         System.out.println( "You Started Adventuring!!" );
-        Thread.sleep(1000);
-        System.out.println(".");
-        Thread.sleep(1000);
-        System.out.println("..");        
-        Thread.sleep(1000);
-        System.out.println("...");
-        Thread.sleep(1000);
+        //Thread.sleep(1000);
+        //System.out.println(".");
+        //Thread.sleep(1000);
+        //System.out.println("..");        
+        //Thread.sleep(1000);
+        //System.out.println("...");
+        //Thread.sleep(1000);
         random = new Random();
         int paths = random.nextInt(3);
-        int randomitem = random.nextInt(itemManager.getSize()+1); // gets the max number from the map adding 1 to it
+        int randomitem = random.nextInt(itemManager.getSize()); // gets the max number from the map adding 1 to it
         switch (paths) {
             case 0:
                 questmodel.getquest();
@@ -37,8 +40,8 @@ public class AdventureModel {
                 break;
             case 2:
                 scanner = new Scanner(System.in);
-                randomitem = random.nextInt(itemManager.getSize()+1);
-                System.out.println("You found a " + itemManager.getItemById(randomitem));
+                randomitem = random.nextInt(itemManager.getSize());
+                System.out.println("You found " + itemManager.getItemNameById(randomitem));
                 Thread.sleep(1000);
                 System.out.println("Do you want to Keep?(Yes/No)");
                 String userchoose = scanner.nextLine();
@@ -48,35 +51,47 @@ public class AdventureModel {
                 }
                 
                 if(userchoose.equalsIgnoreCase("Yes")){
-                    System.out.println("You kept " + itemManager.getItemById(randomitem));
+                    ItemSystem item = itemManager.getItemById(randomitem);
+                    System.out.println("You have successfully kept " + item.getItemName()+ " in the inventory." );
+                    inventory.addItemtoInventory(item);
                     Thread.sleep(1000);
                     System.out.print("\033[H\033[2J");
                 }
                 else{
-                    System.out.println("You didn't keep " + itemManager.getItemById(randomitem) );
+                    System.out.println("You didn't keep " + itemManager.getItemNameById(randomitem) );
                     Thread.sleep(1000);
                     System.out.print("\033[H\033[2J");
                 }
-               
                 break;
+
+            }
+
+       
+    }
+
+    public void Inventory () throws InterruptedException{
+        inventory.displayInventory();
+        //Thread.sleep(2500);
+    }
+
+    public void Throw() throws InterruptedException{
+        try {
+            scanner = new Scanner(System.in);
+            System.out.println("\nEnter the row and column of the item which you wanna throw away.");
+            System.out.print("Enter Row:");
+            int inventory_row = scanner.nextInt();
+            System.out.print("Enter Column:");
+            int inventory_column = scanner.nextInt();
+            inventory.removeItemfromInventory(inventory_row, inventory_column);
+            Thread.sleep(1500);
+            System.out.print("\033[H\033[2J");
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid Type");
         }
-
-        
-        
-    }
-
-    public void Take () throws InterruptedException{
-        System.out.println( "You took an item." );
-        Thread.sleep(1000);
-        System.out.print("\033[H\033[2J");
+    
 
     }
-    public void Drop() throws InterruptedException{
-        System.out.println( "You dropped an item.!!" );
-        Thread.sleep(1000);
-        System.out.print("\033[H\033[2J");
 
-    }
     public void  Use() throws InterruptedException{
         System.out.println( "You used an item." );
         Thread.sleep(1000);
@@ -87,5 +102,5 @@ public class AdventureModel {
         System.out.println( "You exited the game!!!" );
         System.exit(0);
     }
-    
+
 }

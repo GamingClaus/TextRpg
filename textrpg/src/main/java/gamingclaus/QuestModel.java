@@ -7,8 +7,10 @@ public class QuestModel {
     private Scanner scanner;
     private String choice;
     private Random random;
+    private Inventory inventory;
     ItemManager itemManager = new ItemManager();
-    QuestModel(){
+    QuestModel(Inventory inventory){
+        this.inventory = inventory;
         scanner = new Scanner(System.in);
     }
 
@@ -31,25 +33,28 @@ public class QuestModel {
         if (choice.equalsIgnoreCase("do")) {
             random = new Random();
             int battle = random.nextInt(100);//generates random number between 1 and 2;
-            int randomitem = random.nextInt(itemManager.getSize()+1);
+            int randomitem = random.nextInt(itemManager.getSize());
             if(battle<60){
                 //doing the quest has a 60% chance of completing the quest successfully
+                ItemSystem item = itemManager.getItemById(randomitem);
+
                 System.out.println("You Successfully Completed the quest.");
                 Thread.sleep(1000);
                 System.out.println("Old Man: Thank you!! My Dear Child here is your reward!");
                 Thread.sleep(1000);
-                System.out.println("The Old man gave you " + itemManager.getItemById(randomitem));
+                System.out.println("The Old man gave you " + item.getItemName());
+                inventory.addItemtoInventory(item);
+                System.out.println("You kept it in the inventory");
                 Thread.sleep(1000);
-
                 System.out.println("Then you went your own way.!");
-                Thread.sleep(1000);
+                Thread.sleep(1500);
                 System.out.print("\033[H\033[2J");
             }
             else{
                 System.out.println("You messed up :(");
                 Thread.sleep(500);
                 System.out.println("You went back to adventure sadly!");
-                Thread.sleep(1000);
+                Thread.sleep(1500);
                 System.out.print("\033[H\033[2J");
                 
             }
@@ -61,7 +66,5 @@ public class QuestModel {
             Thread.sleep(1000);
             System.out.print("\033[H\033[2J");
             }
-            
     }
-    
 }
