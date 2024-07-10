@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class TextAdventure{
     public static void main(String[] args) throws InterruptedException {
 
-        String[] listcommands = {"adventure","inventory","inventory_throw","use","exit"};
+        String[] listcommands = {"adventure","inventory","inventory_throw","use","commands","exit"};
         List<String> validcommands = Arrays.asList(listcommands); // converts the array into arraylist
         String playername = "";
         String playercommand = " ";
@@ -15,10 +15,13 @@ public class TextAdventure{
         final String ANSI_UNDERLINE = "\u001B[4m"; 
         final String ANSI_RESET = "\u001B[0m";
         Inventory inventory = new Inventory();
+        CoinSystem coinSystem = new CoinSystem();
         AdventureModel adventureModel = new AdventureModel();
         PlayerModel playermodel = new PlayerModel();
-        MonsterModel monsterModel = new MonsterModel(inventory);
-        QuestModel questModel = new QuestModel(inventory);
+        
+        MonsterModel monsterModel = new MonsterModel(inventory,coinSystem);
+        QuestModel questModel = new QuestModel(inventory,coinSystem);
+        
         ItemManager itemManager = new ItemManager();
         Scanner scanner = new Scanner(System.in);
 
@@ -48,6 +51,9 @@ public class TextAdventure{
             if(validcommands.contains(playercommand))
             playercommand.toLowerCase(); //switches the userinput to all lowercase
             switch (playercommand) {
+                case "commands":
+                    System.out.println("The List of commands are: " + validcommands);
+                    break;
                 case "adventure":
                     adventureModel.Go();
                     Thread.sleep(500);

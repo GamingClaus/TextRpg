@@ -4,15 +4,21 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class QuestModel {
+    private CoinSystem coinSystem;
     private Scanner scanner;
     private String choice;
     private Random random;
     private Inventory inventory;
     ItemManager itemManager = new ItemManager();
-    QuestModel(Inventory inventory){
+   
+    QuestModel(Inventory inventory,CoinSystem coinSystem){
+        this.coinSystem = coinSystem; // constructor to pass the inventory when ever the inventory is used
         this.inventory = inventory;
         scanner = new Scanner(System.in);
     }
+
+
+
 
     public void getquest() throws InterruptedException{
         Thread.sleep(700);
@@ -42,7 +48,9 @@ public class QuestModel {
                 Thread.sleep(1000);
                 System.out.println("Old Man: Thank you!! My Dear Child here is your reward!");
                 Thread.sleep(1000);
-                System.out.println("The Old man gave you " + item.getItemName());
+                int coinmanager = coinSystem.coinspawner();
+                System.out.println("The Old man gave you " + item.getItemName() + "and" + coinmanager + " coins");
+                coinSystem.addCoins(coinmanager);
                 inventory.addItemtoInventory(item);
                 System.out.println("You kept it in the inventory");
                 Thread.sleep(1000);

@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class AdventureModel {
     TextAdventure textAdventure = new TextAdventure();
+    CoinSystem  coinSystem = new CoinSystem();
     Inventory inventory;
     MonsterModel monsterModel;
     QuestModel questmodel;
@@ -14,8 +15,11 @@ public class AdventureModel {
     Random random;
     AdventureModel(){
         inventory = new Inventory();
-        monsterModel = new MonsterModel(inventory);
-        questmodel = new QuestModel(inventory);
+        monsterModel = new MonsterModel(inventory,coinSystem);
+        questmodel = new QuestModel(inventory,coinSystem);
+
+       
+        
 
     }
     //List of basic Commands for tpg
@@ -86,7 +90,7 @@ public class AdventureModel {
             Thread.sleep(1500);
             System.out.print("\033[H\033[2J");
         } catch (InputMismatchException e) {
-            System.out.println("Invalid Type");
+            System.out.println("Invalid Type/ Put in an Integer");
         }
     
 

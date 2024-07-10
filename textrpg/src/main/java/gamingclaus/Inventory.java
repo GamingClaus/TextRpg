@@ -39,17 +39,14 @@ public class Inventory {
     }
 
     public void removeItemfromInventory(int row,int column)    {
-        try {
-            if(isValidPosition(row,column) && grid[row][column]!=null){
-                String getname = grid[row][column].getItemName();
-                grid[row][column] = null;
-                System.out.println("Sucessfully Removed "+ getname);// sucessfully removed item 
-            }
-            else{
-                System.out.println("Invalid Position/Slot"); // Invalid position or invalid slot
-            }
-        } catch (InputMismatchException e) {
-            System.out.println("Invalid Type");
+        
+        if(isValidPosition(row,column) && grid[row][column]!=null){
+            String getname = grid[row][column].getItemName();
+            grid[row][column] = null;
+            System.out.println("Sucessfully Removed "+ getname);// sucessfully removed item 
+        }
+        else{
+            System.out.println("Invalid Position/Slot"); // Invalid position or invalid slot
         }
        
         

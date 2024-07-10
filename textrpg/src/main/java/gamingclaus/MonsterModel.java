@@ -5,18 +5,22 @@ import java.util.Scanner;
 
 public class MonsterModel {
     ItemManager itemManager = new ItemManager();
+    private CoinSystem coinSystem = new CoinSystem();
     private String monster_name;
     private String monster_rarirty; //like common ,uncommon,rare or boss
     private Inventory inventory;
     private Scanner scanner;
     private String choice;
     private Random random;
-    MonsterModel(Inventory inventory) {
+    
+    MonsterModel(Inventory inventory,CoinSystem coinSystem){ 
+        this.coinSystem = coinSystem; //constructor to pass the inventory when ever the inventory is used
         this.inventory = inventory;
         scanner = new Scanner(System.in);
         
 
     }
+    
 
     public void encounter() throws InterruptedException{
         System.out.println("You found a monster!");
@@ -41,16 +45,22 @@ public class MonsterModel {
                 Thread.sleep(850);
                 System.out.println("You picked "+ item.getItemName()+" and added it to inventory");
                 Thread.sleep(550);
+                int coinmanager = coinSystem.coinspawner();
+                System.out.println("You also got " + coinmanager +" coins and kept it in bag");
+                coinSystem.addCoins(coinmanager);
                 System.out.println("Then you went your own way.!");
-                Thread.sleep(1500);
+                Thread.sleep(2000);
                 System.out.print("\033[H\033[2J");
 
             }
             else{
                 System.out.println("You were killed by the monster :(");
                 Thread.sleep(500);
+                int coinmanager = coinSystem.coinspawner();
+                System.out.println("You dropped " + coinmanager + " coins");
+                coinSystem.removeCoins(coinmanager);
                 System.out.println("You were sent back to spawn!");
-                Thread.sleep(1000);
+                Thread.sleep(2000);
                 System.out.print("\033[H\033[2J");
             }
         }

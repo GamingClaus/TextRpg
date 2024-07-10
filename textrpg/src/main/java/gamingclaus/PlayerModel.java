@@ -16,7 +16,7 @@ public class PlayerModel {
     
     public String PlayerType(){
         System.out.println("Enter your Player Model(Boy/Girl):");
-        String playertype = scanner.nextLine();
+        String playertype = scanner.next();
         return playertype;
     }
 }
