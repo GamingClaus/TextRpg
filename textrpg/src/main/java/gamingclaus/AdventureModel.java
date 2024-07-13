@@ -10,6 +10,7 @@ public class AdventureModel {
     Inventory inventory;
     MonsterModel monsterModel;
     QuestModel questmodel;
+    Shop shop;
     ItemManager itemManager = new ItemManager();
     Scanner scanner;
     Random random;
@@ -17,7 +18,7 @@ public class AdventureModel {
         inventory = new Inventory();
         monsterModel = new MonsterModel(inventory,coinSystem);
         questmodel = new QuestModel(inventory,coinSystem);
-
+        shop = new Shop (inventory,coinSystem);
        
         
 
@@ -96,15 +97,23 @@ public class AdventureModel {
 
     }
 
-    public void  Use() throws InterruptedException{
-        System.out.println( "You used an item." );
-        Thread.sleep(1000);
-        System.out.print("\033[H\033[2J");
-
+    public void Wallet() throws InterruptedException{
+        System.out.println("Your current balance is "+ coinSystem.currentCoins() + " Coins.");
+    
     }
+
+    public void ShopBuy() throws InterruptedException{
+        shop.buyItem();
+    }
+    
+    public void ShopSell() throws InterruptedException{
+        shop.sellItem();
+    }
+
     public void  Exit(){
         System.out.println( "You exited the game!!!" );
         System.exit(0);
     }
-
 }
+
+

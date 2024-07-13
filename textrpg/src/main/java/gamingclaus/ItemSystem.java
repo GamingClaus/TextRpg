@@ -13,6 +13,10 @@ public class ItemSystem {
         this.item_type = item_type;
     }
 
+    ItemSystem(String itemName){
+       this.item_name = itemName;
+    }
+
     //Getters
 
     public int getId(){

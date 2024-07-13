@@ -43,7 +43,7 @@ public class Inventory {
         if(isValidPosition(row,column) && grid[row][column]!=null){
             String getname = grid[row][column].getItemName();
             grid[row][column] = null;
-            System.out.println("Sucessfully Removed "+ getname);// sucessfully removed item 
+            //System.out.println("Sucessfully Removed "+ getname);// sucessfully removed item 
         }
         else{
             System.out.println("Invalid Position/Slot"); // Invalid position or invalid slot
@@ -57,10 +57,10 @@ public class Inventory {
         for(int i= 0;i<rows;i++){
             for(int j = 0;j<columns;j++){
                 if(grid[i][j]!=null){
-                    System.out.print("|"+grid[i][j].getItemName()+"\t");
+                    System.out.print("|"+grid[i][j].getItemName()+" ");
                 }
                 else{
-                    System.out.print("|"+"   "+"\t");
+                    System.out.print("|"+"   \t");
                 }
                 System.out.print("|");
             }
@@ -68,7 +68,14 @@ public class Inventory {
         }
     }
 
-    
+    public ItemSystem returnItemFromInventory(int row, int column){
+        if(row >= 0 && row < grid.length && column >= 0 && column < grid.length){
+            return grid[row][column];
+        }
+        return null;
+        
+        
+    }
     
     private boolean isValidPosition(int row, int column) {
         return row >=0 && row < rows && column >=0 && column <columns;    

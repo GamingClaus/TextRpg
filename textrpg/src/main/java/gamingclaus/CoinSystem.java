@@ -12,6 +12,9 @@ public class CoinSystem {
     private final int max_coin_count;
     private final int min_coin_count;
     private List<Integer> numbers_gap;
+    private final String ANSI_UNDERLINE = "\u001B[4m"; 
+    private final String ANSI_RESET = "\u001B[0m";
+
          
     //in starting player has a coin count of 50;
     
@@ -37,7 +40,7 @@ public class CoinSystem {
     public void addCoins(int coin_amount_add){ // for adding coins for the player 
         if(coin_count + coin_amount_add <= max_coin_count  ){
             coin_count += coin_amount_add; // coin_count = coin_count+ coin_amount_add;
-            System.out.println("Now your balance is " + coin_count);
+            //System.out.println("Now your balance is " + coin_count);
         }
         else{
             coin_count = max_coin_count;
@@ -47,15 +50,21 @@ public class CoinSystem {
     public void removeCoins(int coin_amount_remove){  //for removing the coins of the player
         if(coin_count - coin_amount_remove > min_coin_count  ){
             coin_count -= coin_amount_remove; // coin_count = coin_count - coin_amount_remove;
-            System.out.println("Now your balance is " + coin_count);
+            //System.out.println("Now your balance is " + coin_count);
         }
         else{
             coin_count = min_coin_count;
         }
     }
 
+    public int currentCoins(){
+        return coin_count;
+    }
 
-
+    //set method
+    //public int setcurrentCoins(int amount_coins){
+     //   return coin_count=amount_coins;
+    //}/
 
 
 }

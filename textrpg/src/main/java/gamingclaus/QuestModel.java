@@ -49,7 +49,7 @@ public class QuestModel {
                 System.out.println("Old Man: Thank you!! My Dear Child here is your reward!");
                 Thread.sleep(1000);
                 int coinmanager = coinSystem.coinspawner();
-                System.out.println("The Old man gave you " + item.getItemName() + "and" + coinmanager + " coins");
+                System.out.println("The Old man gave you " + item.getItemName() + " and " + coinmanager + " coins");
                 coinSystem.addCoins(coinmanager);
                 inventory.addItemtoInventory(item);
                 System.out.println("You kept it in the inventory");

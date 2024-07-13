@@ -7,13 +7,15 @@ import java.util.Scanner;
 public class TextAdventure{
     public static void main(String[] args) throws InterruptedException {
 
-        String[] listcommands = {"adventure","inventory","inventory_throw","use","commands","exit"};
+        String[] listcommands = {"adventure","inventory","inventory_throw","wallet","shop_buy","shop_sell","commands","exit"};
         List<String> validcommands = Arrays.asList(listcommands); // converts the array into arraylist
         String playername = "";
         String playercommand = " ";
 
         final String ANSI_UNDERLINE = "\u001B[4m"; 
         final String ANSI_RESET = "\u001B[0m";
+        final String ANSI_Bold = "\033[0;1m";
+
         Inventory inventory = new Inventory();
         CoinSystem coinSystem = new CoinSystem();
         AdventureModel adventureModel = new AdventureModel();
@@ -21,11 +23,11 @@ public class TextAdventure{
         
         MonsterModel monsterModel = new MonsterModel(inventory,coinSystem);
         QuestModel questModel = new QuestModel(inventory,coinSystem);
-        
+        Shop shop = new Shop(inventory, coinSystem);
         ItemManager itemManager = new ItemManager();
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Welcome to The World Of Text-Based-Rpg Game!!!");
+        System.out.println(ANSI_Bold+"Welcome to The World Of Text-Based-Rpg Game!!!\n" + ANSI_RESET);
         Thread.sleep(1000);
         String player = playermodel.PlayerType();
         //checks the player if they have chosen a right player type
@@ -35,14 +37,14 @@ public class TextAdventure{
             
         }
          Thread.sleep(200);
-         System.out.println("Enter your name:");
-         playername = scanner.nextLine();
+         System.out.println(ANSI_Bold+ "Enter your name:" + ANSI_RESET);
+         playername = scanner.nextLine();   
          System.out.println("Hello " + ANSI_UNDERLINE + playername + ANSI_RESET + " Welcome to the World of Text-Rpg."  );
         
        
 
         while(true){
-            System.out.println("\nEnter What you Want to do:");
+            System.out.println("\n"+ANSI_Bold+"Enter What you Want to do:"+ ANSI_RESET);
             playercommand = scanner.nextLine();
             playercommand.toLowerCase(); //switches the userinput to all lowercase
 
@@ -64,8 +66,14 @@ public class TextAdventure{
                 case "inventory_throw":
                     adventureModel.Throw();
                     break;
-                case "use":
-                    adventureModel.Use();
+                case "wallet":
+                    adventureModel.Wallet();
+                    break;
+                case "shop_buy":
+                    adventureModel.ShopBuy();
+                    break;
+                case "shop_sell":
+                    adventureModel.ShopSell();
                     break;
                 case "exit":
                     adventureModel.Exit();
