@@ -27,8 +27,8 @@ public class Shop {
 
 
     private void shopdisplay(){
-        System.out.println("Shop Items\n");
-        System.out.println("Name"+ "\t" + "Price"+  "\t" +"Stock" + "\t");
+        System.out.println("\nShop Items");
+        System.out.println("Name"+ "\t" + "Price"+  "\t");
         for(Map.Entry<Integer, ShopItem> entry : shop_map.entrySet()){
             ShopItem item = entry.getValue();
             System.out.println(item.getItemName() + "\t" + item.getItemPrice() + "\t");
@@ -76,7 +76,6 @@ public class Shop {
 
         ItemSystem item = playerinventory.returnItemFromInventory(row, column);{
             if(item!=null){
-                //Shop shop = new Shop(playerinventory, playercoins);
                 playerinventory.returnItemFromInventory(row, column);
                 int Itemprice = this.getItemPrice(item.getItemName());
                 int halfprice = Itemprice/2;

@@ -1,5 +1,6 @@
 package gamingclaus;
 
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
@@ -24,7 +25,7 @@ public class AdventureModel {
 
     }
     //List of basic Commands for tpg
-    public void Go() throws InterruptedException{
+    public void Go() throws InterruptedException, IOException{
         System.out.println( "You Started Adventuring!!" );
         //Thread.sleep(1000);
         //System.out.println(".");

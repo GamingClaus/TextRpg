@@ -1,5 +1,6 @@
 package gamingclaus;
 
+import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -20,7 +21,7 @@ public class QuestModel {
 
 
 
-    public void getquest() throws InterruptedException{
+    public void getquest() throws InterruptedException, IOException{
         Thread.sleep(700);
         System.out.println("You meet an Old man on the Way");
         Thread.sleep(1000);
@@ -40,30 +41,35 @@ public class QuestModel {
             random = new Random();
             int battle = random.nextInt(100);//generates random number between 1 and 2;
             int randomitem = random.nextInt(itemManager.getSize());
-            if(battle<60){
+           // if(battle<60){
                 //doing the quest has a 60% chance of completing the quest successfully
+                
                 ItemSystem item = itemManager.getItemById(randomitem);
-
-                System.out.println("You Successfully Completed the quest.");
-                Thread.sleep(1000);
-                System.out.println("Old Man: Thank you!! My Dear Child here is your reward!");
-                Thread.sleep(1000);
-                int coinmanager = coinSystem.coinspawner();
-                System.out.println("The Old man gave you " + item.getItemName() + " and " + coinmanager + " coins");
-                coinSystem.addCoins(coinmanager);
-                inventory.addItemtoInventory(item);
-                System.out.println("You kept it in the inventory");
-                Thread.sleep(1000);
-                System.out.println("Then you went your own way.!");
-                Thread.sleep(1500);
-                System.out.print("\033[H\033[2J");
-            }
-            else{
-                System.out.println("You messed up :(");
-                Thread.sleep(500);
-                System.out.println("You went back to adventure sadly!");
-                Thread.sleep(1500);
-                System.out.print("\033[H\033[2J");
+                QuizApi quizApi = new QuizApi();
+                
+                boolean quizpassed = quizApi.QuizQuestionFetcher();
+                
+                if(quizpassed){
+                    System.out.println("You Successfully Completed the quest.");
+                    Thread.sleep(1000);
+                    System.out.println("Old Man: Thank you!! My Dear Child here is your reward!");
+                    Thread.sleep(1000);
+                    int coinmanager = coinSystem.coinspawner();
+                    System.out.println("The Old man gave you " + item.getItemName() + " and " + coinmanager + " coins");
+                    coinSystem.addCoins(coinmanager);
+                    inventory.addItemtoInventory(item);
+                    System.out.println("You kept it in the inventory");
+                    Thread.sleep(1000);
+                    System.out.println("Then you went your own way.!");
+                    Thread.sleep(1500);
+                    System.out.print("\033[H\033[2J");
+                }
+                else{
+                    System.out.println("You messed up :(");
+                    Thread.sleep(500);
+                    System.out.println("You went back to adventure sadly!");
+                    Thread.sleep(1500);
+                    System.out.print("\033[H\033[2J");
                 
             }
         }
